@@ -69,8 +69,11 @@ class App:
         tempassignments = []
         for assignment in assignments:
             tempassignments.append(assignment.__dict__)
+            
         #convert the list of dictionaries to a json string
+
         packedassignments = json.dumps(tempassignments)
+
         #write the json string to the file
         with open(filename, 'w') as f:
             f.write(packedassignments)
@@ -177,7 +180,7 @@ class App:
             description = input("Enter the description for the assignment: ")
             #add the assignment to assignments.json
             temp = self.repeatassignments
-            temp.append(repeatAssignment(int(assign), int(due), title, uuid.uuid4, False, description, repeat))
+            temp.append(repeatAssignment(int(assign), int(due), title, str(uuid.uuid4()), False, description, repeat))
 
             
 
