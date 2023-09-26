@@ -1,9 +1,13 @@
 
 import uuid
 import time
+
+def myuid():
+    return uuid.uuid4()
+
 class Assignment:
 
-    def __init__(self, assign, due, title, description, uuid=uuid.uuid4 , completed = False):
+    def __init__(self, assign, due, title, description, uuid=str(uuid.uuid4()) , completed = False):
         self.uuid = uuid
         self.assign = assign
         self.due = due
@@ -22,7 +26,7 @@ class Assignment:
 
 class repeatAssignment(Assignment):
     #this is a class for an assignment that repeats every week or every day
-    def __init__(self, assign, due, title, description, uuid=uuid.uuid4, completed = False, repeat = 'null', hasrepeated = []):
+    def __init__(self, assign, due, title, description, uuid=str(uuid.uuid4()), completed = False, repeat = 'null', hasrepeated = []):
         super().__init__(assign, due, title, description, uuid, completed)
         self.repeat = repeat
         self.hasrepeated = hasrepeated
