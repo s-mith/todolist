@@ -26,14 +26,17 @@ class Assignment:
 
 class repeatAssignment(Assignment):
     #this is a class for an assignment that repeats every week or every day
-    def __init__(self, assign, due, title, description, uuid=str(uuid.uuid4()), completed = False, repeat = 'null', hasrepeated = []):
-        super().__init__(assign, due, title, description, uuid, completed)
+    def __init__(self, assign, due, title, description, uuid=str(uuid.uuid4()), repeat = 'null', hasrepeated = []):
+        self.assign = assign
+        self.due = due
+        self.title = title
+        self.description = description
+        self.uuid = uuid
         self.repeat = repeat
         self.hasrepeated = hasrepeated
 
     def didToday(self):
         #check if the assignment has repeated today
-        import time
         #get dd.mm.yyyy
         day = time.strftime('%d.%m.%Y', time.localtime(time.time()))
         #check if that day is in self.hasrepeated
@@ -48,7 +51,8 @@ class repeatAssignment(Assignment):
         #get dd.mm.yyyy
         day = time.strftime('%d.%m.%Y', time.localtime(time.time()))
         #convert the date to unix time
-        assign = time.mktime(time.strptime(day, '%d.%m.%Y')+time.strptime(self.assign, '%H.%M'))
+        assign = time.mktime(time.strptime(day + " " + self.assign, "%d.%m.%Y %H.%M"))
+
         
         return assign
     
@@ -58,7 +62,7 @@ class repeatAssignment(Assignment):
         #get dd.mm.yyyy
         day = time.strftime('%d.%m.%Y', time.localtime(time.time()))
         #convert the date to unix time
-        due = time.mktime(time.strptime(day, '%d.%m.%Y')+time.strptime(self.due, '%H.%M'))
+        due = time.mktime(time.strptime(day + " " + self.due, "%d.%m.%Y %H.%M"))
         
         return due
 
